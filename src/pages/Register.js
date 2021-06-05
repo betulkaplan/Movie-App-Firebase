@@ -1,11 +1,19 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { createUser } from '../auth/firebase';
 
 const Register = () => {
   const fname = useRef();
   const lname = useRef();
   const email = useRef();
   const password = useRef();
+
+  const handleRegister = () => {
+    createUser(email.current.value, password.current.value);
+    console.log(email.current.value);
+    console.log(password.current.value);
+  };
+
   return (
     <RegisterContainer>
       <div className="banner">
@@ -61,7 +69,8 @@ const Register = () => {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              console.log(fname.current.value);
+              handleRegister();
+              //console.log(fname.current.value);
             }}
           >
             Register
