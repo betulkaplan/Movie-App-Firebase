@@ -32,11 +32,14 @@ export const createUser = async (email, password, displayName) => {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
+        console.log(errorMessage);
         // ..
       });
     const currentUser = firebase.auth().currentUser;
     await currentUser.updateProfile({ displayName: displayName });
-  } catch (error) {}
+  } catch (error) {
+    alert('The email address is already in use by another account!');
+  }
 };
 
 export const signIn = async (email, password) => {
@@ -55,17 +58,17 @@ export const signIn = async (email, password) => {
     });
 };
 
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (user) {
-//     // User is signed in, see docs for a list of available properties
-//     // https://firebase.google.com/docs/reference/js/firebase.User
-//     var uid = user.uid;
-//     // ...
-//   } else {
-//     // User is signed out
-//     // ...
-//   }
-// });
+export const userObserver = async (setCurrentUser) => {
+  await firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      setCurrentUser(null);
+    }
+  });
+};
+
+export const signOut = () => firebase.auth().signOut();
 
 export const auth = firebaseApp.auth();
 export default firebaseApp;

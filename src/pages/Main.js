@@ -14,7 +14,6 @@ const Main = () => {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('BUX', res.results);
         setMovies(res.results);
       });
   }, []);

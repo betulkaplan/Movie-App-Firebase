@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BsHeart } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { signOut } from '../auth/firebase';
 
 const Navbar = () => {
   const history = useHistory();
@@ -37,7 +38,7 @@ const Navbar = () => {
         {!currentUser ? (
           <button onClick={() => handleClick('register')}>Register</button>
         ) : (
-          <button>Logout</button>
+          <button onClick={() => signOut()}>Logout</button>
         )}
       </NavRight>
     </NavbarContainer>

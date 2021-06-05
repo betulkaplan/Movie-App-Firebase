@@ -9,9 +9,15 @@ const Register = () => {
   const password = useRef();
 
   const handleRegister = () => {
-    createUser(email.current.value, password.current.value);
-    console.log(email.current.value);
-    console.log(password.current.value);
+    createUser(
+      email.current.value,
+      password.current.value,
+      fname.current.value + ' ' + lname.current.value
+    );
+    fname.current.value = '';
+    lname.current.value = '';
+    email.current.value = '';
+    password.current.value = '';
   };
 
   return (
