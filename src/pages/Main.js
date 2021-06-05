@@ -14,6 +14,7 @@ const Main = () => {
     )
       .then((res) => res.json())
       .then((res) => {
+        console.log(res.result);
         setMovies(res.results);
       });
   }, []);
@@ -94,8 +95,9 @@ const MovieContainer = styled.div`
   padding: 10px 150px 10px 150px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  @media screen and (min-width: 480px) {
+  @media screen and (max-width: 980px) {
     grid-template-columns: repeat(2, 1fr);
+    padding: 10px 50px 10px 50px;
   }
 `;
 

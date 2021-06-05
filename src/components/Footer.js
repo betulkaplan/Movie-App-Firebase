@@ -10,8 +10,7 @@ const FooterContainer = styled.div`
   color: white;
   padding: 20px;
   text-align: center;
-  position: fixed;
-  bottom: 0;
+
   width: 100%;
 `;
 

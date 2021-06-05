@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { signIn } from '../auth/firebase';
 
 const Login = () => {
   const email = useRef();
   const password = useRef();
+  const history = useHistory();
 
   const handleLogin = () => {
     signIn(email.current.value, password.current.value);
+    history.push('/');
   };
   return (
     <RegisterContainer>
