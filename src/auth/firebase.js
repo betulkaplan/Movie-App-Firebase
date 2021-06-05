@@ -18,35 +18,42 @@ const firebaseApp = firebase.initializeApp({
   // appId: process.env.EACT_APP_FIREBASE_API_ID,
 });
 
-export const createUser = async (email, password) => {
-  await firebase
+export const createUser = async (email, password, displayName) => {
+  try {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ..
+      });
+    const currentUser = firebase.auth().currentUser;
+    await currentUser.updateProfile({ displayName: displayName });
+  } catch (error) {}
+};
+
+export const signIn = async (email, password) => {
+  firebase
     .auth()
-    .createUserWithEmailAndPassword(email, password)
+    .signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      console.log(user);
+      console.log('LOGIN', user);
       // ...
     })
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      // ..
     });
 };
-
-// firebase
-//   .auth()
-//   .signInWithEmailAndPassword(email, password)
-//   .then((userCredential) => {
-//     // Signed in
-//     var user = userCredential.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//   });
 
 // firebase.auth().onAuthStateChanged((user) => {
 //   if (user) {

@@ -1,9 +1,14 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { signIn } from '../auth/firebase';
 
 const Login = () => {
   const email = useRef();
   const password = useRef();
+
+  const handleLogin = () => {
+    signIn(email.current.value, password.current.value);
+  };
   return (
     <RegisterContainer>
       <div className="banner">
@@ -35,7 +40,15 @@ const Login = () => {
               placeholder="Enter your password..."
             />
           </div>
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
+          >
+            Login
+          </button>
         </form>
       </div>
     </RegisterContainer>
